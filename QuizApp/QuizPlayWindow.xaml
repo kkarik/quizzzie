@@ -1,0 +1,74 @@
+﻿<Window x:Class="QuizApp.QuizPlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Прохождение викторины" Height="400" Width="600"
+        Background="#ffd640 ">
+    <Window.Resources>
+        <Style x:Key="AnswerRadioButtonStyle" TargetType="RadioButton">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#fcad0d "/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="15" Color="#1C2833" ShadowDepth="5"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Новый стиль для TextBlock -->
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="10">
+        <StackPanel>
+            <!-- Текст вопроса -->
+            <TextBlock x:Name="QuestionText" Style="{StaticResource TextBlockStyle}" FontSize="16" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+            <!-- Таймер -->
+            <TextBlock x:Name="TimerText" Style="{StaticResource TextBlockStyle}" FontSize="14" Foreground="Red" HorizontalAlignment="Right" Margin="0,0,0,10" />
+
+            <!-- Варианты ответов -->
+            <ItemsControl x:Name="AnswerOptions">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton Content="{Binding}" GroupName="Answers" Checked="AnswerSelected" Style="{StaticResource AnswerRadioButtonStyle}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- Кнопка "Следующий вопрос" -->
+            <Button x:Name="NextButton" Content="Следующий вопрос" Click="NextButton_Click" IsEnabled="False" Margin="0,20,0,0" Style="{StaticResource ButtonStyle}"/>
+        </StackPanel>
+    </Grid>
+</Window>
